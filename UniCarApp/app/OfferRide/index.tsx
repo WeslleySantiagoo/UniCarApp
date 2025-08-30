@@ -13,8 +13,9 @@ import Button from "@/components/Button";
 export default function OfferRide () {
     const router = useRouter();
     return (
-        <SafeAreaProvider style={{backgroundColor: "#f1f1f1", flex: 1}}>
-            <SafeAreaView style={{flex: 1}}>
+        <SafeAreaProvider style={{flex: 1, backgroundColor: "#000"}}>
+            <SafeAreaView style={{backgroundColor: "#000", flex: 1}}>
+                <View style={{backgroundColor: "#fff", flex: 1}}>
                     <Header onPress={() => router.dismiss(1)}/>
                     <View style={styles.container}>
                         <View style={{justifyContent:"flex-start", gap:20}}>
@@ -64,6 +65,7 @@ export default function OfferRide () {
                     <View style={[styles.container, {flex: 1}]}>
                         <Button label="Cadastrar" style={styles.button}/>
                     </View>
+                </View>
             </SafeAreaView>
         </SafeAreaProvider>
     )
