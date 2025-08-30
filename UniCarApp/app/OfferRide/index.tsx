@@ -1,17 +1,43 @@
 import Header from "@/components/Header";
 import TextInputComponent from "@/components/TextInput";
 import { useRouter } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Button from "@/components/Button";
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 
 export default function OfferRide () {
     const router = useRouter();
+    const [time, setTime] = useState(new Date());
+    const [mode, setMode] = useState<"date" | "time">("time");
+    const [show, setShow] = useState(false);
+    const [init, setInit] = useState(true);
+    
+    const onChange = (event: any, selectedDate?: Date) => {
+        setShow(false);
+        setInit(false)
+        if (selectedDate) {
+            setTime(selectedDate);
+        }
+    };
+    const showPicker = (pickerMode: "date" | "time") => {
+        setMode(pickerMode);
+        setShow(true);
+    };
+    
+    const formattedDate = time.toLocaleDateString("pt-BR");
+    const formattedTime = time.toLocaleTimeString("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false
+    });
+    
     return (
         <SafeAreaProvider style={{flex: 1, backgroundColor: "#000"}}>
             <SafeAreaView style={{backgroundColor: "#000", flex: 1}}>
@@ -34,21 +60,33 @@ export default function OfferRide () {
                             </View>
 
                             <View style={{width:"100%", gap:10}}>
-                                <Text style={styles.title}>Horário de Partido</Text>
-                                <TextInputComponent width={"85%"} label={"__ : __"} inputMode="numeric">
+                                <Text style={styles.title}>Horário e Data de Partida</Text>
+                                <TextInputComponent width={"85%"} label={init ? "00:00" : `${formattedTime}`} datetime={true} onPress={() => showPicker("time")}>
                                     <FontAwesome6 name="clock" size={24} color="#5E9C9E"/>
                                 </TextInputComponent>
+                                <TextInputComponent width={"85%"} label={formattedDate} datetime={true} onPress={() => showPicker("date")}>
+                                    <FontAwesome6 name="calendar" size={24} color="#5E9C9E"/>
+                                </TextInputComponent>
+                                {show && (
+                                        <DateTimePicker
+                                        value={time}
+                                        mode={mode}
+                                        is24Hour={true}
+                                        display="default"
+                                        onChange={onChange}
+                                        />
+                                    )}
                             </View>
 
                             <View style={{width:"100%", gap:10}}>
                                 <Text style={styles.title}>Preço</Text>
-                                <TextInputComponent width={"85%"} label={"R$ 00,00"} inputMode="numeric">
+                                <TextInputComponent width={"85%"} label={"R$ 00,00"} inputMode="numeric" monetary={true}>
                                     <Entypo name="wallet" size={28} color="#5E9C9E" />
                                 </TextInputComponent>
                             </View>
 
                             <View style={{width:"100%", gap:10}}>
-                                <Text style={styles.title}>veículo</Text>
+                                <Text style={styles.title}>Vagas Disponíveis</Text>
                                 <TextInputComponent width={80} label={"1"} inputMode="numeric" maxLength={1}>
                                     <FontAwesome name="user" size={24} color="#5E9C9E" />
                                 </TextInputComponent>

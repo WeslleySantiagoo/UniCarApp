@@ -1,33 +1,68 @@
 import React from "react";
-import { View, StyleSheet, TextInput, TextInputProps } from 'react-native';
+// eslint-disable-next-line import/no-duplicates
+import { useState } from "react";
+import { View, StyleSheet, TextInput, TextInputProps, TouchableOpacityProps, Text, TouchableOpacity } from 'react-native';
 
-type Props = TextInputProps & {
+type Props = TextInputProps & TouchableOpacityProps & {
     children: React.ReactNode;
     width?: number | string ;
     label: string;
+    datetime?: boolean;
+    monetary?: boolean;
     
 }
 
-export default function TextInputComponent({ children, width, label, ...rest}: Props) {
+export default function TextInputComponent({ children, width, label, datetime, monetary, ...rest}: Props) {
     const wi = width
-    return (
-        <View style={[styles.container, {width: wi as any}]} >
+    const [valor, setValor] = useState("");
+    const formatarMoeda = (text: string) => {
+        if (monetary) {
+            // Remove tudo que não for número
+            const numeros = text.replace(/\D/g, "");
+
+            // Transforma em reais: últimos 2 dígitos são centavos
+            const numeroFloat = parseFloat(numeros) / 100;
+
+            // Formata como moeda brasileira
+            return numeroFloat.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+            });
+        }
+        return text;
+    };
+
+    if (!datetime) {
+        return (<View style={[styles.container, {width: wi as any}]} >
             <View style={[{justifyContent:"center", alignItems:"center", width:30, height:30}]}>
                 {children}
             </View>
             <TextInput
             style={[styles.input, {...rest}]}
             placeholder={label}
+            value={valor}
+            onChangeText={setValor}
             inputMode='text'
             selectionColor={'rgba(101, 181, 185, 0.25)'}
             selectionHandleColor={'#65B5B9'}
             cursorColor={'#65B5B9'}
             placeholderTextColor={'#65B5B9'}
             scrollEnabled={false}
+            onBlur={() => setValor(formatarMoeda(valor))}
             {...rest}
             />
         </View>
-    )
+        )
+    } else {
+        return (
+            <TouchableOpacity style={[styles.container, {width: wi as any}]} {...rest}>
+                <View style={[{justifyContent:"center", alignItems:"center", width:30, height:30}]}>
+                    {children}
+                </View>
+                <Text style={styles.input}>{label}</Text>
+            </TouchableOpacity>
+        )
+    }
 }
 
 const styles = StyleSheet.create({

@@ -10,7 +10,7 @@ export default function SplashScreen () {
   useEffect(() => {
     const timer = setTimeout(() => {
       redirectTo();
-    }, 0);
+    }, 2000);
     return () => clearTimeout(timer);
   });
   return (
