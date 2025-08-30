@@ -41,7 +41,11 @@ export default function TextInputComponent({ children, width, label, datetime, m
             style={[styles.input, {...rest}]}
             placeholder={label}
             value={valor}
-            onChangeText={setValor}
+            onChangeText={(valor) => {
+                // eslint-disable-next-line no-unused-expressions
+                setValor;
+                setValor(formatarMoeda(valor))
+            }}
             inputMode='text'
             selectionColor={'rgba(101, 181, 185, 0.25)'}
             selectionHandleColor={'#65B5B9'}
