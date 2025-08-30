@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "UniCarApp",
+    "name": "UniCar",
     "slug": "UniCarApp",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -9,34 +9,48 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "icon": {
+        "dark": "./assets/icons/ios-icon-dark.svg",
+        "light": "./assets/icons/ios-icon-light.svg"
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/icons/adaptive-icon.png",
+        "monochromeImage": "./assets/icons/adaptive-icon.png",
+        "backgroundImage": "./assets/icons/adaptive-icon.png",
+        "backgroundColor": "#fff"
       },
-      "edgeToEdgeEnabled": true
-    },
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "edgeToEdgeEnabled": true,
+      "package": "com.weslleysantiago.UniCarApp"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "/UniCarApp/assets/images/splash-icon.png",
+          "dark": {
+            "image": "/UniCarApp/assets/images/splash-icon.png",
+            "backgroundColor": "#003638"
+          },
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#fff"
         }
-      ]
+      ],
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "368935fd-4fd3-421b-9cd4-6b0ddcfe8bf0"
+      }
+    },
+    "owner": "weslleysantiago"
   }
 }

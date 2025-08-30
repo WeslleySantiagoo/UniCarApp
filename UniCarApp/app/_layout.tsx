@@ -1,29 +1,47 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+import {useEffect} from 'react';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+  const [loaded, error] = useFonts({
+    'MontserratBold': require('../assets/fonts/Montserrat-Bold.ttf'),
+    'Inter': require('../assets/fonts/Inter.ttf'),
   });
 
-  if (!loaded) {
-    // Async font loading only occurs in development.
+  useEffect(() => {
+    if (loaded || error) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded, error]);
+
+  if (!loaded && !error) {
     return null;
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <Stack>
+      <Stack.Screen
+        name='SplashScreen/index'
+        options={{title: 'SplashScreen', headerShown: false,
+        animation: "default",
+        animationDuration: 700}}
+      /> 
+      <Stack.Screen
+        name='Home/index'
+        options={{title: 'Home', headerShown: false,
+        animation: "default",
+        animationDuration: 700}}
+      /> 
+      <Stack.Screen
+      name='OfferRide/index'
+      options={{
+        title: 'OfferRide', 
+        headerShown: false,
+        animation: "slide_from_right",
+      }}/>
+    </Stack>
   );
 }
