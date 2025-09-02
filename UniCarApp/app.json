@@ -30,14 +30,14 @@
       [
         "expo-splash-screen",
         {
-          "image": "/UniCarApp/assets/images/splash-icon.png",
-          "dark": {
-            "image": "/UniCarApp/assets/images/splash-icon.png",
-            "backgroundColor": "#003638"
-          },
-          "imageWidth": 200,
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 100,
           "resizeMode": "contain",
-          "backgroundColor": "#fff"
+          "backgroundColor": "#fff",
+          "dark": {
+            "image": "./assets/images/splash-icon.png",
+            "backgroundColor": "#003638"
+          }
         }
       ],
       "expo-font"
