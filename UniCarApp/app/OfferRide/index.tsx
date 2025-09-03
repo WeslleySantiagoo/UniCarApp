@@ -1,14 +1,17 @@
 import Header from "@/components/Header";
 import TextInputComponent from "@/components/TextInput";
+import Button from "@/components/Button";
+
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Image, StyleSheet, Text, View, Keyboard, TouchableWithoutFeedback } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+
+// Icons
 import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import Button from "@/components/Button";
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 
