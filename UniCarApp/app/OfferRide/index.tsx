@@ -46,7 +46,7 @@ export default function OfferRide () {
     const handleChangeText = (text: string) => {
         const {saida, numeroFloat } = formatarMoeda(text)
         setPriceField(saida)
-        setPrice(numeroFloat)
+        setPrice(numeroFloat * 10)
         setData({...data, price: price})
     }
 
@@ -87,7 +87,16 @@ export default function OfferRide () {
         setInit(false)
         if (selectedDate) {
             setTime(selectedDate);
-            setData({...data, date: formattedDateEUA})
+
+            const year = selectedDate.getFullYear();
+            const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
+            const day = String(selectedDate.getDate()).padStart(2, '0');
+            const hour = String(selectedDate.getHours()).padStart(2, '0');
+            const minute = String(selectedDate.getMinutes()).padStart(2, '0');
+            const second = String(selectedDate.getSeconds()).padStart(2, '0');
+            const localISOString = `${year}-${month}-${day}T${hour}:${minute}:${second}.000Z`;
+
+            setData({...data, date: localISOString});
         }
     };
     const showPicker = (pickerMode: "date" | "time") => {
@@ -96,7 +105,6 @@ export default function OfferRide () {
     };
     
     const formattedDate = time.toLocaleDateString("pt-BR");
-    const formattedDateEUA = time.toISOString().split('T')[0];
     const formattedTime = time.toLocaleTimeString("pt-BR", {
     hour: "2-digit",
     minute: "2-digit",
@@ -162,7 +170,7 @@ export default function OfferRide () {
                             </View>
 
                             <View style={{width:"100%", gap:10}}>
-                                <Text style={styles.title}>Vagas Disponíveis {price}</Text>
+                                <Text style={styles.title}>Vagas Disponíveis</Text>
                                 <TextInputComponent width={80} label={"0"} inputMode="numeric" maxLength={1} value={value} onChangeText={setValue} onBlur={() => vacancies(value)}>
                                     <FontAwesome name="user" size={24} color="#5E9C9E" />
                                 </TextInputComponent>

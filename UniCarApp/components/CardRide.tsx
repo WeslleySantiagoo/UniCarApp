@@ -10,10 +10,11 @@ type Props = TouchableOpacityProps & {
     car: string;
     origin: string;
     time: string;
+    date: string;
     price: number;
 }
 
-export default function CardRide ({ name,image,evaluation,car,origin,time,price, ...rest }: Props) {
+export default function CardRide ({ name,image,evaluation,car,origin,time,date,price, ...rest }: Props) {
     return (
         <TouchableOpacity style={styles.container} {...rest}>
             <View style={styles.box}>
@@ -42,7 +43,10 @@ export default function CardRide ({ name,image,evaluation,car,origin,time,price,
             </View>
             <View style={{backgroundColor: "#D9D9D9", width: "100%", height: 1}}/>
             <View style={[styles.box, {gap: 10}]}>
-                <Text style={[styles.text, styles.time]}>{time}</Text>
+                <View style={{justifyContent:"center", alignItems:"center"}}>
+                    <Text style={[styles.text, styles.time]}>{time}</Text>
+                    <Text style={[styles.date, styles.text]}>{date}</Text>
+                </View>
                 <View>
                     <Text style={[styles.text, {color: "#7A7A7A"}]}>Partida</Text>
                     <Text style={[styles.text, {color:"#007075"}]}>{origin}</Text>
@@ -57,16 +61,13 @@ const styles = StyleSheet.create({
     container: {
         width: "100%",
         height: 200,
-        // borderWidth: 1,
         borderRadius: 20,
-        // backgroundColor: "#191",
         justifyContent: "center",
         alignItems: "center",
     },
     box: {
         alignItems: "center",
         flexDirection: "row",
-        // backgroundColor: "pink",
         height:99,
         width: "100%",
         padding: 15,
@@ -79,7 +80,11 @@ const styles = StyleSheet.create({
         elevation: 8,
     },
     time: {
-        fontSize: 18,
+        fontSize: 12,
+        color: "#8E8E8E",
+    },
+    date: {
+        fontSize: 12,
         color: "#8E8E8E",
     },
     price: {

@@ -10,6 +10,7 @@ export interface Carona {
     price?: number;
     createdAT: string;
     updatedAT: string;
+    userId: number;
 }
 
 export const getCaronas = async (): Promise<Carona[]> => {

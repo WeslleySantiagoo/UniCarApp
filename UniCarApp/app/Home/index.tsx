@@ -18,30 +18,30 @@ function SearchConteiner() {
     const router = useRouter()
     const [origin, setOrigin] = useState("")
     const [destination, setDestination] = useState("")
-    const [time, setTime] = useState(new(Date));
+    const [time, setTime] = useState<Date | null>(null);
     const [show, setShow] = useState(false);
-    const [init, setInit] = useState(true);
-    const formattedDate = time.toLocaleDateString("pt-BR");
-    
+    const formattedDate = time ? time.toLocaleDateString("pt-BR") : "Quando?";
+
     const handleSearch = () => {
-        if (((origin && destination) !== "") && (init !== true)) {
-            router.push("/Search")
+        if (origin && destination && time) {
+            router.push("/Search");
         }
-    }
+    };
 
     const onChange = (event: any, selectedDate?: Date) => {
         setShow(false);
         if (selectedDate) {
-            setInit(false)
             setTime(selectedDate);
-            handleSearch()
+            if (origin && destination) {
+                router.push("/Search");
+            }
         }
     };
-
 
     const showPicker = () => {
         setShow(true);
     };
+
     return (
         <View style={styles.containerSearch}>
             <View style={{flexDirection:"row"}}>
@@ -55,43 +55,48 @@ function SearchConteiner() {
                 </View>
                 <View style={{justifyContent:"center", width: "80%", gap:5}}>
                     <TextInputComponent 
-                    width={"100%"} 
-                    label={"Partida"} 
-                    backgroundColor="transparent" 
-                    txtColor="#8EAFB1"
-                    onChangeText={setOrigin}
-                    value={origin}
-                    returnKeyType="done"
-                    onSubmitEditing={() => {handleSearch()}}/>
+                        width={"100%"} 
+                        label={"Partida"} 
+                        backgroundColor="transparent" 
+                        txtColor="#8EAFB1"
+                        onChangeText={setOrigin}
+                        value={origin}
+                        returnKeyType="done"
+                        onSubmitEditing={handleSearch}
+                    />
                     <View style={{backgroundColor:"#d7d7d7", height:1, marginHorizontal: 15}}/>
                     <TextInputComponent 
-                    width={"100%"} 
-                    label={"Destino"} 
-                    backgroundColor="transparent" 
-                    txtColor="#8EAFB1"
-                    onChangeText={setDestination}
-                    value={destination}
-                    returnKeyType="done"
-                    onSubmitEditing={() => {handleSearch()}}/>
+                        width={"100%"} 
+                        label={"Destino"} 
+                        backgroundColor="transparent" 
+                        txtColor="#8EAFB1"
+                        onChangeText={setDestination}
+                        value={destination}
+                        returnKeyType="done"
+                        onSubmitEditing={handleSearch}
+                    />
                     <TextInputComponent 
                         width={"100%"} 
                         backgroundColor="transparent"  
                         txtColor="#8EAFB1" 
-                        label={init ? "Quando?" : formattedDate} 
+                        label={formattedDate} 
                         datetime={true}
-                        onPress={() => showPicker()}/>
+                        onPress={showPicker}
+                    />
                     {show && (
-                            <DateTimePicker
-                            value={time}
+                        <DateTimePicker
+                            value={time || new Date()}
                             mode={"date"}
                             is24Hour={true}
                             display="default"
                             onChange={onChange}
-                            />
-                        )}
+                        />
+                    )}
                 </View>
             </View>
-            <Text style={{fontFamily: "Inter", textAlign: "justify", color: "red", marginHorizontal: 20}}>BUG NÃO RESOLVIDO: Caso preencher e não for direcionado para outra tela, abra qualquer campo e clique em &quot;Ok&quot; ou &quot;Enter&quot; novamente.</Text>
+            <Text style={{fontFamily: "Inter", textAlign: "justify", color: "red", marginHorizontal: 20}}>
+                BUG NÃO RESOLVIDO: Caso preencher e não for direcionado para outra tela, abra qualquer campo e clique em &quot;Ok&quot; ou &quot;Enter&quot; novamente.
+            </Text>
         </View>
     )
 }

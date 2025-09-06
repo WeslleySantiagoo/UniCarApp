@@ -1,50 +1,101 @@
-# Welcome to your Expo app 👋
+# UniCarApp 🚗
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Bem-vindo ao **UniCarApp**!
+Este é um aplicativo de caronas universitárias desenvolvido em React Native com Expo, pensado para facilitar a oferta e busca de caronas entre estudantes.
 
-## Get started
+---
 
-1. Install dependencies
+## 📲 Instalação e Execução
 
-   ```bash
-   npm install
-   ```
+### 1. Pré-requisitos
 
-2. Start the app
+- [Node.js](https://nodejs.org/) (recomendado v18+)
+- [Expo CLI](https://docs.expo.dev/get-started/installation/) (`npm install -g expo-cli`)
+- Um emulador Android/iOS ou o app [Expo Go](https://expo.dev/go) no seu celular
 
-   ```bash
-   npx expo start
-   ```
+### 2. Instale as dependências
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+No diretório do projeto:
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 3. Inicie o projeto
 
-## Learn more
+```bash
+npx expo start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+- Use o QR Code no terminal para abrir no Expo Go (Android/iOS).
+- Ou pressione `a` para abrir no emulador Android, `i` para iOS.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
+## 🗺️ Estrutura do Projeto
 
-Join our community of developers creating universal apps.
+```
+UniCarApp/
+├── app/                # Rotas e telas principais
+│   ├── Home/           # Tela inicial e busca de caronas
+│   ├── OfferRide/      # Tela para oferecer carona
+│   ├── Search/         # Tela de resultados de busca
+│   └── SplashScreen/   # Tela de splash
+├── components/         # Componentes reutilizáveis (CardRide, Button, etc)
+├── services/           # Serviços de API (carona, usuário)
+├── assets/             # Imagens, fontes e ícones
+├── app.json            # Configuração do Expo
+└── package.json
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+---
+
+## 🚦 Como Usar o App
+
+### 1. Splash Screen
+
+Ao abrir, você verá a tela de splash com o logo UniCar.
+
+### 2. Tela Inicial (Home)
+
+- **Buscar Carona:**Preencha os campos de partida, destino e data.Após preencher, você será direcionado para a tela de busca.
+- **Oferecer Carona:**
+  Toque no botão "Oferecer carona" para cadastrar uma nova carona.
+
+### 3. Buscar Caronas
+
+- Veja uma lista de caronas disponíveis.
+- Toque em um card para ver detalhes da carona e solicitar participação.
+
+### 4. Oferecer Carona
+
+- Preencha os campos obrigatórios: origem, destino, data/hora, preço e vagas.
+- Clique em "Cadastrar" para publicar sua carona.
+- Aguarde a confirmação de cadastro.
+
+---
+
+## 🛠️ Funcionalidades
+
+- **Cadastro e busca de caronas**
+- **Detalhes do motorista e viagem**
+- **Solicitação de carona**
+- **Cadastro de preço, vagas e veículo**
+- **Interface amigável e responsiva**
+
+---
+
+## 📝 Observações
+
+- O app utiliza uma API hospedada em [https://unicar-w56x.onrender.com](https://unicar-w56x.onrender.com).
+- Para rodar em produção, configure as variáveis de ambiente e endpoints conforme necessário.
+- O projeto utiliza fontes customizadas (Montserrat, Inter). Certifique-se de que as fontes estão em `assets/fonts`.
+
+---
+
+## 👨‍💻 Desenvolvimento
+
+- **Adicionar novas telas:**Crie uma nova pasta dentro de `app/` e adicione seu arquivo `index.tsx`.
+- **Adicionar novos componentes:**Crie arquivos em `components/` e importe onde necessário.
+- **Serviços de API:**
+  Veja exemplos em `services/caronaService.ts` e `services/userService.ts`.
