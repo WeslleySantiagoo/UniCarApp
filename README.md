@@ -1,6 +1,6 @@
 # UniCarApp 🚗
 
-Bem-vindo ao **UniCarApp**!
+Bem-vindo ao **UniCarApp**!  
 Este é um aplicativo de caronas universitárias desenvolvido em React Native com Expo, pensado para facilitar a oferta e busca de caronas entre estudantes.
 
 ---
@@ -24,11 +24,20 @@ npm install
 ### 3. Inicie o projeto
 
 ```bash
-npx expo start
+npx expo start -c
 ```
 
 - Use o QR Code no terminal para abrir no Expo Go (Android/iOS).
 - Ou pressione `a` para abrir no emulador Android, `i` para iOS.
+
+---
+
+## 📦 Download do App
+
+Caso prefira, faça o download do arquivo `.apk` pelo link abaixo:
+
+**[Clique aqui para baixar o APK do UniCarApp](https://drive.google.com/file/d/1on7MLK_cE1obTMVjmYW6UjUNh84RIhDr/view?usp=sharing)**
+
 
 ---
 
@@ -58,9 +67,8 @@ Ao abrir, você verá a tela de splash com o logo UniCar.
 
 ### 2. Tela Inicial (Home)
 
-- **Buscar Carona:**Preencha os campos de partida, destino e data.Após preencher, você será direcionado para a tela de busca.
-- **Oferecer Carona:**
-  Toque no botão "Oferecer carona" para cadastrar uma nova carona.
+- **Buscar Carona:** Preencha os campos de partida, destino e data. Após preencher, você será direcionado para a tela de busca.
+- **Oferecer Carona:** Toque no botão "Oferecer carona" para cadastrar uma nova carona.
 
 ### 3. Buscar Caronas
 
@@ -72,6 +80,12 @@ Ao abrir, você verá a tela de splash com o logo UniCar.
 - Preencha os campos obrigatórios: origem, destino, data/hora, preço e vagas.
 - Clique em "Cadastrar" para publicar sua carona.
 - Aguarde a confirmação de cadastro.
+
+---
+
+## ⚠️ Observação Importante para Oferecer Carona
+
+Para oferecer uma carona, **o usuário deve estar previamente cadastrado de forma externa no banco de dados deployado**.
 
 ---
 
@@ -95,7 +109,7 @@ Ao abrir, você verá a tela de splash com o logo UniCar.
 
 ## 👨‍💻 Desenvolvimento
 
-- **Adicionar novas telas:**Crie uma nova pasta dentro de `app/` e adicione seu arquivo `index.tsx`.
-- **Adicionar novos componentes:**Crie arquivos em `components/` e importe onde necessário.
+- **Adicionar novas telas:** Crie uma nova pasta dentro de `app/` e adicione seu arquivo `index.tsx`.
+- **Adicionar novos componentes:** Crie arquivos em `components/` e importe onde necessário.
 - **Serviços de API:**
   Veja exemplos em `services/caronaService.ts` e `services/userService.ts`.
