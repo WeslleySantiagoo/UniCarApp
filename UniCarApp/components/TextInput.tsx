@@ -14,22 +14,6 @@ type Props = TextInputProps & TouchableOpacityProps & {
 export default function TextInputComponent({ children, width, label, datetime, monetary, backgroundColor, txtColor, ...rest}: Props) {
     const wi = width
     const [valor, setValor] = useState("");
-    const formatarMoeda = (text: string) => {
-        if (monetary) {
-            // Remove tudo que não for número
-            const numeros = text.replace(/\D/g, "");
-    
-            // Transforma em reais: últimos 2 dígitos são centavos
-            const numeroFloat = parseFloat(numeros) / 100;
-    
-            // Formata como moeda brasileira
-            return numeroFloat.toLocaleString("pt-BR", {
-                style: "currency",
-                currency: "BRL",
-            });
-        }
-        return text;
-    };
 
     const bgColor = backgroundColor ? backgroundColor : "#E3FAF9";
     const textColor = txtColor ? txtColor : "#65B5B9";
@@ -46,11 +30,7 @@ export default function TextInputComponent({ children, width, label, datetime, m
             placeholder={label}
             value={valor}
             onChangeText={(valor) => {
-                if (monetary) {
-                    setValor(formatarMoeda(valor));
-                } else {
-                    setValor(valor)
-                }
+                setValor(valor)
             }}
             inputMode='text'
             selectionColor={'rgba(101, 181, 185, 0.25)'}
@@ -58,7 +38,7 @@ export default function TextInputComponent({ children, width, label, datetime, m
             cursorColor={'#65B5B9'}
             placeholderTextColor={textColor}
             scrollEnabled={false}
-            onBlur={() => setValor(formatarMoeda(valor))}
+            onBlur={() => setValor(valor)}
             {...rest}
             />
         </View>

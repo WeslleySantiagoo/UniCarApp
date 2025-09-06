@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import { useState } from "react";
 
-import { StyleSheet, View, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { StyleSheet, View, TouchableWithoutFeedback, Keyboard, Text } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 import Button from "@/components/Button";
@@ -91,6 +91,7 @@ function SearchConteiner() {
                         )}
                 </View>
             </View>
+            <Text style={{fontFamily: "Inter", textAlign: "justify", color: "red", marginHorizontal: 20}}>BUG NÃO RESOLVIDO: Caso preencher e não for direcionado para outra tela, abra qualquer campo e clique em &quot;Ok&quot; ou &quot;Enter&quot; novamente.</Text>
         </View>
     )
 }
@@ -138,7 +139,7 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         top: 130,
         width: "80%",
-        height: "25%"
+        paddingVertical: 30
     },
     button: {
         position: "absolute",
